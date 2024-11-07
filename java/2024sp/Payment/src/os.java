@@ -1,2 +1,4 @@
-package PACKAGE_NAME;public interface os {
+public interface os {
+    void call(String number);
+    void ring(String number);
 }

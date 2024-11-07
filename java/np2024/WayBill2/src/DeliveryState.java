@@ -1,12 +1,10 @@
-public interface DeliverState {
+public interface DeliveryState {
 
-  void processDelivery(); // 배송 중
+  void orderCheck();
+
+  void startDelivery(); // 배송 중
 
   void processRefund(); // 환불
-
-  void cancelOrder(); // 취소
-
-  void waitForDelivery(); // 대기
 
   void completeDelivery(); // 배송 완료
 }

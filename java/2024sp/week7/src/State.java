@@ -1,2 +1,4 @@
-package PACKAGE_NAME;public interface State {
+public interface State {
+    void like_pushed();
+    void hate_pushed();
 }

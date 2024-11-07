@@ -1,2 +1,14 @@
-package PACKAGE_NAME;public class Drink {
+public class Drink {
+    private DrinkState ds;
+    public Drink(){
+        setDs(ds);
+    }
+
+    public void order(){
+        
+    }
+
+    public void setDs(DrinkState ds) {
+        this.ds = ds;
+    }
 }

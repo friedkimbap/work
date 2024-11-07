@@ -1,7 +1,11 @@
+import java.io.Serial;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
 
 public class ChatMsg implements Serializable {
+  @Serial
+  private static final long serialVersionUID = 1L;
+
   public final static int MODE_LOGIN = 0x1;
   public final static int MODE_LOGOUT = 0x2;
   public final static int MODE_TX_STRING = 0x10;

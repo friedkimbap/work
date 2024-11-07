@@ -1,8 +1,8 @@
-public class Order {
+public class Manager {
 
   private DeliveryState deliveryState;
 
-  public Order() {
+  public Manager() {
     this.deliveryState = new WaitForDeliveryState(this);
   }
 

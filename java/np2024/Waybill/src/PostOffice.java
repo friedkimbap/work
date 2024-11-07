@@ -1,13 +1,18 @@
-import javax.print.attribute.standard.Destination;
+import java.util.ArrayList;
 
 public class PostOffice { // 우체국
     private DeliveryStrategy diliveryStrategy;
 
-    private PostOffice(){
+    public PostOffice(){
 
     }
 
-    public void delivery(Ddestination d){
-        System.out.println(d.getName()+"님"+d.getAddress()+"로 택배를 보냅니다.");
+    public void setDiliveryStrategy(Ddestination d) {
+        this.diliveryStrategy = d.getDeliveryStrategy();
+    }
+
+    public void deliver(Ddestination d){
+        setDiliveryStrategy(d);
+        diliveryStrategy.delivery(d);
     }
 }

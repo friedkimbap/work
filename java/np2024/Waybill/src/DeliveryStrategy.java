@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public interface DeliveryStrategy {
+public interface DeliveryStrategy {
+    public void delivery(Ddestination d);
 }
