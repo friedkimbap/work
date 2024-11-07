@@ -1,29 +1,30 @@
-public class WaitForDeliveryState implements DeliveryState {
+public class WaitForDeliveryState implements DeliveryState { // 주문 대기 상태
 
-  private Manager manager;
+  private Order order;
 
-  public WaitForDeliveryState(Manager manager) {
-    this.manager = manager;
-  }
-
-  @Override
-  public void orderCheck() {
-    System.out.println("이미 주문 확인을 하였습니다.\n");
+  public WaitForDeliveryState(Order order) {
+    this.order = order;
   }
 
   @Override
   public void startDelivery() {
-    System.out.println("배송이 시작되었습니다.\n");
-    manager.setDeliveryState(new ProcessDeliveryState(manager));
+    System.out.println(order.getProductName()+" 주문의 배송이 시작되었습니다.");
+    order.setDeliveryState(new ProcessDeliveryState(order));
   }
 
   @Override
   public void processRefund() {
-    System.out.println("환불이 완료되었습니다.\n");
+    System.out.println(order.getProductName()+" 주문의 환불이 완료되었습니다.");
+    order.setDeliveryState(new RefundConfirmedState(order));
   }
 
   @Override
   public void completeDelivery() {
-    System.out.println("배송이 시작되지 않았습니다.\n");
+    System.out.println(order.getProductName()+" 주문의 배송이 시작되지 않았습니다.");
+  }
+
+  @Override
+  public void completeOrder() {
+    System.out.println(order.getProductName()+" 주문은 아직 배송이 완료되지 않았습니다");
   }
 }
