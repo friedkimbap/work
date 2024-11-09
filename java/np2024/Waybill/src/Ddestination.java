@@ -1,6 +1,5 @@
-import java.util.Random;
 
-public class Ddestination { // 배송자
+public class Ddestination { // 배송지
     private String address;
     private String name;
     private DeliveryStrategy deliveryStrategy;

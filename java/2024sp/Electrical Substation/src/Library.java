@@ -35,6 +35,7 @@ public class Library {
     System.out.println("책에 대한 정보가 없습니다.");
   }
 
+  // 책 반납 메소드
   public synchronized void returnBook(String title){
     for (Book book : books) {
       if (book.getTitle().equals(title) && book.isBorrowed()) {

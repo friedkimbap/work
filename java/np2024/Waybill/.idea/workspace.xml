@@ -5,18 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f5244db-2251-4857-a2f3-9c2f6b3de9e9" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/../WayBill2/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../WayBill2/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/CompleteDeliveryState.class" beforeDir="false" afterPath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/CompleteDeliveryState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/DeliveryState.class" beforeDir="false" afterPath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/DeliveryState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/Order.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/OrderConfirmedState.class" beforeDir="false" afterPath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/OrderConfirmedState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/ProcessDeliveryState.class" beforeDir="false" afterPath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/ProcessDeliveryState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/RefundConfirmedState.class" beforeDir="false" afterPath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/RefundConfirmedState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/WaitForDeliveryState.class" beforeDir="false" afterPath="$PROJECT_DIR$/../WayBill2/out/production/WayBill2/WaitForDeliveryState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2024sp/Electrical Substation/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../2024sp/Electrical Substation/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2024sp/Electrical Substation/src/Library.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2024sp/Electrical Substation/src/Library.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MulImgChatClient/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MulImgChatClient/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MulImgChatServer/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MulImgChatServer/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WayBill2/src/RefundConfirmedState.java" beforeDir="false" afterPath="$PROJECT_DIR$/../WayBill2/src/RefundConfirmedState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WayBill2/src/WaitForDeliveryState.java" beforeDir="false" afterPath="$PROJECT_DIR$/../WayBill2/src/WaitForDeliveryState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../ws_react/my-app" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ws_react/my-app" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ddestination.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ddestination.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NormalDelivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NormalDelivery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PostOffice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Coupang.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/QuickService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/QuickService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RocketDelivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RocketDelivery.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,12 +34,12 @@
     &quot;assignee&quot;: &quot;friedkimbap&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/friedkimbap/work.git&quot;,
-    &quot;accountId&quot;: &quot;3a717a0f-dce3-4f34-b2f9-2d92c54a8806&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/friedkimbap/work",
+    "accountId": "521c6678-615f-4375-8121-a53086a87935"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 2
@@ -47,15 +49,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/work/java/np2024/Waybill",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true",
+    "애플리케이션.Main.executor": "Run"
   }
-}</component>
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
@@ -66,6 +82,7 @@
       <updated>1730981144789</updated>
       <workItem from="1730981146016" duration="15000" />
       <workItem from="1730981373909" duration="2000" />
+      <workItem from="1731168589417" duration="1985000" />
     </task>
     <servers />
   </component>

@@ -1,9 +1,7 @@
-import java.util.ArrayList;
-
-public class PostOffice { // 우체국
+public class Coupang { // 배달업체
     private DeliveryStrategy diliveryStrategy;
 
-    public PostOffice(){
+    public Coupang(){
 
     }
 

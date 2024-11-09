@@ -1,4 +1,4 @@
-public class RefundConfirmedState implements DeliveryState{
+public class RefundConfirmedState implements DeliveryState{ // 환불 완료 상태 클래스
     private Order order;
 
     public RefundConfirmedState(Order order) {

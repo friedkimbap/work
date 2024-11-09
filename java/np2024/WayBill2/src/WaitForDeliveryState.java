@@ -1,4 +1,4 @@
-public class WaitForDeliveryState implements DeliveryState { // 주문 대기 상태
+public class WaitForDeliveryState implements DeliveryState { // 배송 대기 상태
 
   private Order order;
 
