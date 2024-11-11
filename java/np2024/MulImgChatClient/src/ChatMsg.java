@@ -34,9 +34,9 @@ public class ChatMsg implements Serializable {
     this(userID,mode,message,null);
   }
 
-  public ChatMsg(String userID, int mode, ImageIcon icon){
-    this(userID,mode,null,icon);
-  }
+//  public ChatMsg(String userID, int mode, ImageIcon icon){
+//    this(userID,mode,null,icon);
+//  }
 
   public ChatMsg(String userID, int mode, String filename, long size){
     this(userID,mode,filename,null, size);

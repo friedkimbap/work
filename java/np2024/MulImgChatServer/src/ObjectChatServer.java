@@ -151,13 +151,30 @@ public class ObjectChatServer extends JFrame {
 
   public void printDisplay(String str){
 //    t_display.append(str+"\n");
-    int len = document.getLength();
+    int len = t_display.getDocument().getLength();
+
+    t_display.setCaretPosition(len);
+
     try {
       document.insertString(len,str+"\n",null);
     } catch (BadLocationException e) {
       throw new RuntimeException(e);
     }
-    t_display.setCaretPosition(t_display.getDocument().getLength());
+  }
+
+  public void printDisplay(ImageIcon image){
+    int len = t_display.getDocument().getLength();
+
+    t_display.setCaretPosition(len);
+
+    if (image.getIconWidth() > 400) {
+      Image img = image.getImage();
+      Image changeImg = img.getScaledInstance(400, -1, Image.SCALE_SMOOTH);
+      image = new ImageIcon(changeImg);
+    }
+
+    t_display.insertIcon(image);
+    printDisplay("");
   }
 
 
@@ -185,17 +202,28 @@ public class ObjectChatServer extends JFrame {
 //            printDisplay(">> 현재 참가자 수: "+users.size());
 //            continue;
 //          }
-          if(msg.mode==ChatMsg.MODE_LOGIN){
-            uid = msg.userID;
-            printDisplay(">> 새 참가자: "+uid);
-            printDisplay(">> 현재 참가자 수: "+users.size());
-            continue;
-          } else if(msg.mode==ChatMsg.MODE_LOGOUT){
-            break;
-          } else if(msg.mode==ChatMsg.MODE_TX_STRING){
-            String message = uid + ":" + msg.message;
-            printDisplay(message);
-            broadcasting(msg);
+          String message;
+          switch (msg.mode) {
+            case ChatMsg.MODE_LOGIN -> {
+              uid = msg.userID;
+              printDisplay(">> 새 참가자: " + uid);
+              printDisplay(">> 현재 참가자 수: " + users.size());
+            }
+            case ChatMsg.MODE_LOGOUT -> {
+              break;
+            }
+            case ChatMsg.MODE_TX_STRING, ChatMsg.MODE_TX_FILE -> {
+              message = uid + ": " + msg.message;
+              printDisplay(message);
+              printDisplay("");
+              broadcasting(msg);
+            }
+            case ChatMsg.MODE_TX_IMAGE -> {
+              message = uid + ": " + msg.message;
+              printDisplay(message);
+              printDisplay(msg.image);
+              broadcasting(msg);
+            }
           }
         }
 
@@ -224,10 +252,6 @@ public class ObjectChatServer extends JFrame {
       } catch (IOException e) {
         System.err.println(">> 클라이언트 일반 전송 오류: "+e.getMessage());
       }
-    }
-
-    public void sendMessages(String msg){
-      send(new ChatMsg(uid,ChatMsg.MODE_TX_STRING,msg));
     }
 
     public void broadcasting(ChatMsg msg) {

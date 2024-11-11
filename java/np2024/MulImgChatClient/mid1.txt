@@ -1,0 +1,157 @@
+login.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ch06 : login.jsp</title>
+</head>
+<body>
+<div align="center"> <H2>로그인</H2>
+<form name="form1" method="POST" action="selProduct.jsp">
+<input type="text" name="username"/>
+<input type="submit" value="로그인"/>
+</form>
+</div>
+</body>
+</html>
+
+selProduct.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>ch06 : selProduct.jsp</title>
+</head>
+<% request.setCharacterEncoding("UTF-8"); // euc-kr 
+session.setAttribute("username",request.getParameter("username"));%>
+<body>
+<div align="center">
+<H2>상품선택</H2>
+<HR> 
+<%=session.getAttribute("username") %>님 환영합니다!!!!
+<HR> 
+<form name="form1" method="POST" action="add.jsp">
+<SELECT name="product">
+<option>사과</option>
+<option>귤</option> 
+<option>파인애플</option>
+<option>자몽</option> 
+<option>레몬</option> 
+</SELECT>
+<input type="submit" value="추가"/>
+</form> 
+<a href="checkOut.jsp">계산</a>
+</div>
+</body>
+</html>
+
+add.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ch06 : add.jsp</title>
+</HEAD>
+<body>
+<% request.setCharacterEncoding("UTF-8");
+String productname = request.getParameter("product"); 
+ArrayList<String> list = (ArrayList)session.getAttribute("productlist");
+
+if(list == null) {
+	list = new ArrayList<String>();
+	session.setAttribute("productlist",list); 
+} 
+list.add(productname);
+%>
+<script> 
+alert("<%=productname %> 이(가)추가 되었습니다.!!"); 
+history.go(-1); 
+</script>
+</body>
+</html>
+
+checkOut.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>ch06 : checkOut.jsp</title>
+</HEAD>
+<body>
+<div align="center">
+<H2>계산</H2>
+선택한 상품 목록
+<HR>
+<% 
+ArrayList list = (ArrayList)session.getAttribute("productlist");
+if(list == null) {
+out.println("선택한 상품이 없습니다.!!!"); }
+else {
+	int a_num=0, t_num=0, p_num=0, g_num=0, l_num=0;
+	int price=0;
+for(Object productname:list) {
+	switch(String.valueOf(productname)) {
+	case "사과":
+		a_num++;
+		price+=1000;
+		break;
+	case "귤":
+		t_num++;
+		price+=1500;
+		break;
+	case "파인애플":
+		p_num++;
+		price+=2000;
+		break;
+	case "자몽":
+		g_num++;
+		price+=3000;
+		break;
+	case "레몬":
+		l_num++;
+		price+=3000;
+		break;
+	}
+}
+if(a_num>0){
+	out.println("사과의 개수는 "+a_num+"개<br>");
+}
+if(t_num>0){
+	out.println("귤의 개수는 "+t_num+"개<br>");
+}
+if(p_num>0){
+	out.println("파인애플의 개수는 "+p_num+"개<br>");
+}
+if(g_num>0){
+	out.println("자몽의 개수는 "+g_num+"개<br>");
+}
+if(l_num>0){
+	out.println("레몬의 개수는 "+l_num+"개<br>");
+}
+out.println("<hr>총 가격은 " + price + "<hr>");
+}
+%>
+<form name="form1" method="post" action="logout.jsp">
+<input type="submit" value="로그아웃" name="logout">
+</form>
+</div>
+</body>
+</html>
+
+logout.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html>
+<%
+	request.setCharacterEncoding("UTF-8");
+	request.getSession().invalidate();
+	response.sendRedirect("login.jsp");
+%>

@@ -1,8 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 
@@ -10,7 +13,7 @@ public class ObjTalk extends JFrame{
   private JTextField t_input, t_userID, t_hostAddr, t_portNum;
   private DefaultStyledDocument document;
   private JTextPane t_display;
-  private JButton b_connect, b_disconnect, b_send, b_exit;
+  private JButton b_connect, b_disconnect, b_send, b_select, b_exit;
   private String serverAddress;
   private int serverPort;
   private Socket socket;
@@ -63,14 +66,31 @@ public class ObjTalk extends JFrame{
 
   public JPanel createInputPanel() {
     JPanel p = new JPanel(new BorderLayout());
+    JPanel buttonPanel = new JPanel(new FlowLayout());
+    JFileChooser chooser = new JFileChooser();
+
+    FileNameExtensionFilter txtFilter = new FileNameExtensionFilter("Text File", "txt");
+    FileNameExtensionFilter imgFilter = new FileNameExtensionFilter("Image File", "png", "jpg", "gif");
+
     t_input = new JTextField();
     b_send = new JButton("보내기");
+    b_select = new JButton("선택하기");
+
 
     p.add(t_input, BorderLayout.CENTER);
-    p.add(b_send, BorderLayout.EAST);
+    buttonPanel.add(b_send);
+    buttonPanel.add(b_select);
+    p.add(buttonPanel, BorderLayout.EAST);
 
     b_send.setEnabled(false);
+    b_select.setEnabled(false);
     t_input.setEnabled(false);
+
+    chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+    chooser.setMultiSelectionEnabled(false);
+    chooser.addChoosableFileFilter(txtFilter);
+    chooser.addChoosableFileFilter(imgFilter);
+    chooser.setAcceptAllFileFilterUsed(false);
 
     ActionListener actionListener = new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -80,6 +100,39 @@ public class ObjTalk extends JFrame{
 
     b_send.addActionListener(actionListener);
     t_input.addActionListener(actionListener);
+
+    b_select.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(ActionEvent e) {
+
+        int ret = chooser.showOpenDialog(ObjTalk.this);
+        if (ret != JFileChooser.APPROVE_OPTION) {
+          JOptionPane.showMessageDialog(ObjTalk.this, "파일을 선택하지 않았습니다.");
+          return;
+        }
+
+        File selectedFile = chooser.getSelectedFile();
+        String fileExtension = selectedFile.getName().substring(selectedFile.getName().lastIndexOf(".") + 1);
+        long fileSizeInBytes = selectedFile.length();
+        long fileSizeInMB = fileSizeInBytes / (1024 * 1024);
+        long maxSizeInMB = 10;
+
+        if (fileSizeInMB > maxSizeInMB) {
+          JOptionPane.showMessageDialog(ObjTalk.this, "파일 크기가 너무 큽니다: " + fileSizeInMB + " MB"); return;
+        }
+
+        t_input.setText(selectedFile.getAbsolutePath());
+
+        if (fileExtension.equals("txt")) {
+
+          sendFile();
+        } else if (fileExtension.equals("png")||fileExtension.equals("jpg")||fileExtension.equals("gif")) {
+          sendImage();
+        }
+
+      }
+    });
 
     return p;
   }
@@ -138,6 +191,7 @@ public class ObjTalk extends JFrame{
 
         t_input.setEnabled(true);
         b_send.setEnabled(true);
+        b_select.setEnabled(true);
         b_exit.setEnabled(false);
 
         t_userID.setEditable(false);
@@ -156,6 +210,7 @@ public class ObjTalk extends JFrame{
 
         t_input.setEnabled(false);
         b_send.setEnabled(false);
+        b_select.setEnabled(false);
         b_exit.setEnabled(true);
 
         t_userID.setEditable(true);
@@ -178,18 +233,32 @@ public class ObjTalk extends JFrame{
 
   public void printDisplay(String str){
 //    t_display.append(str+"\n");
-    int len = document.getLength();
+    int len = t_display.getDocument().getLength();
+
+    t_display.setCaretPosition(len);
+
     try {
       document.insertString(len,str+"\n",null);
     } catch (BadLocationException e) {
       throw new RuntimeException(e);
     }
-    t_display.setCaretPosition(t_display.getDocument().getLength());
   }
 
   public void printDisplay(ImageIcon image){
+    int len = t_display.getDocument().getLength();
 
+    t_display.setCaretPosition(len);
+
+    if (image.getIconWidth() > 400){
+      Image img = image.getImage();
+      Image changeImg = img.getScaledInstance(400, -1, Image.SCALE_SMOOTH);
+      image = new ImageIcon(changeImg);
+    }
+
+    printDisplay("");
+    t_display.insertIcon(image);
   }
+
 
   public String getLocalAddr() {
     InetAddress local = null;
@@ -240,11 +309,33 @@ public class ObjTalk extends JFrame{
           switch (inMsg.mode){
             case ChatMsg.MODE_TX_STRING -> {
               printDisplay(inMsg.userID + ": " + inMsg.message);
-              break;
+            }
+            case ChatMsg.MODE_TX_IMAGE -> {
+              BufferedImage bufferedImage = new BufferedImage(inMsg.image.getIconWidth(), inMsg.image.getIconHeight(), BufferedImage.TYPE_INT_RGB );
+              bufferedImage.getGraphics().drawImage(inMsg.image.getImage(), 0, 0, null);
+
+              ImageIO.write(bufferedImage, "png", new File(inMsg.message));
+
+              printDisplay(inMsg.userID + ": " + inMsg.message);
+              printDisplay(inMsg.image);
             }
             case ChatMsg.MODE_TX_FILE -> {
+              String[] messageLines = inMsg.message.split("\n");
+              File file = new File(messageLines[0]);
+              try (FileOutputStream fos = new FileOutputStream(file)) {
+                for (int i = 1; i < messageLines.length; i++) {
+                  fos.write(messageLines[i].getBytes());
+                  fos.write('\n');
+                }
+                fos.flush();
+              } catch (IOException e) {
+                printDisplay(">> 파일 저장 중 오류 발생: " + e.getMessage());
+              }
 
+              printDisplay(inMsg.userID + ": " + inMsg.message);
+              printDisplay("");
             }
+
           }
         } catch (IOException e) {
           printDisplay(">> 연결을 종료했습니다.");
@@ -286,6 +377,48 @@ public class ObjTalk extends JFrame{
     send(new ChatMsg(uid, ChatMsg.MODE_TX_STRING, message));
 
     t_input.setText("");
+  }
+
+  public void sendImage() {
+    String filename = t_input.getText().strip();
+    if (filename.isEmpty()) return;
+
+    File file = new File(filename);
+    if(!file.exists()) {
+      printDisplay(">> 파일이 존재하지 않습니다: "+filename);
+      return;
+    }
+    ImageIcon image = new ImageIcon(filename);
+    send(new ChatMsg(uid, ChatMsg.MODE_TX_IMAGE, file.getName(), image));
+
+    t_input.setText("");
+  }
+
+  public void sendFile() {
+    int k_byte = 1024*1024;
+
+    String filename = t_input.getText().strip();
+    t_input.setText("");
+    if (filename.isEmpty()) return;
+
+    File file = new File(filename);
+    if(!file.exists()) {
+      printDisplay(">> 파일이 존재하지 않습니다: "+filename);
+      return;
+    }
+    byte[] bytes = new byte[1024*k_byte];
+      try {
+        FileInputStream fis = new FileInputStream(file);
+        int size = fis.read(bytes);
+
+        String fileContent = file.getName() + "\n" + new String(bytes, 0, size);
+
+        send(new ChatMsg(uid, ChatMsg.MODE_TX_FILE, fileContent, size));
+      } catch (FileNotFoundException e) {
+          printDisplay(">> 파일이 존재하지 않습니다: " + filename);
+      } catch (IOException e) {
+        printDisplay(">> 파일 읽기 중 오류 발생: " + e.getMessage());
+      }
   }
 
   public void sendUserID() {

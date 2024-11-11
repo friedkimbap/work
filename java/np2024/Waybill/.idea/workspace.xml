@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f5244db-2251-4857-a2f3-9c2f6b3de9e9" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/../../2024sp/Electrical Substation/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../2024sp/Electrical Substation/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../2024sp/Electrical Substation/src/Library.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2024sp/Electrical Substation/src/Library.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MulImgChatClient/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MulImgChatClient/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MulImgChatServer/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MulImgChatServer/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WayBill2/src/RefundConfirmedState.java" beforeDir="false" afterPath="$PROJECT_DIR$/../WayBill2/src/RefundConfirmedState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WayBill2/src/WaitForDeliveryState.java" beforeDir="false" afterPath="$PROJECT_DIR$/../WayBill2/src/WaitForDeliveryState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ddestination.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ddestination.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NormalDelivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NormalDelivery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PostOffice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Coupang.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/QuickService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/QuickService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RocketDelivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RocketDelivery.java" afterDir="false" />
-    </list>
+    <list default="true" id="7f5244db-2251-4857-a2f3-9c2f6b3de9e9" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,12 +19,12 @@
     &quot;assignee&quot;: &quot;friedkimbap&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/friedkimbap/work",
-    "accountId": "521c6678-615f-4375-8121-a53086a87935"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/friedkimbap/work&quot;,
+    &quot;accountId&quot;: &quot;521c6678-615f-4375-8121-a53086a87935&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 2
@@ -54,7 +39,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/work/java/np2024/Waybill",
+    "last_opened_file_path": "C:/work/java/np2024/MulImgChatClient",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -83,6 +68,7 @@
       <workItem from="1730981146016" duration="15000" />
       <workItem from="1730981373909" duration="2000" />
       <workItem from="1731168589417" duration="1985000" />
+      <workItem from="1731233087028" duration="14000" />
     </task>
     <servers />
   </component>
