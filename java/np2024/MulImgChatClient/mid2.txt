@@ -1,0 +1,149 @@
+twitter_login.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ch06 : twitter_login.jsp</title>
+</head>
+<body>
+<div align="center">
+<h2>트위터 로그인</h2>
+<form name="form1" method="POST" action="twitter_list.jsp">
+<input type="text" name="username"/>
+<input type="submit" value="로그인"/>
+</form>
+</div>
+</body>
+</html>
+
+twitter_list.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*" %>
+<!DOCTYPE html>
+<%
+request.setCharacterEncoding("UTF-8");
+String username = request.getParameter("username");
+if(username!=null){
+	session.setAttribute("user", username);
+}
+%>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ch06 : twitter_list.jsp</title>
+</head>
+<body>
+<div align="center">
+<h2>My Simple Twitter!!</h2>
+<hr>
+<form action="tweet.jsp" method="POST">
+@<%= session.getAttribute("user") %>
+<input type="text" name="msg"/>
+<input type="submit" value="Tweet"/>
+</form>
+<hr>
+</div>
+<div align="left">
+<ul>
+
+<%
+//application 내장객체를 통해 msgs 이름으로 저장된 ArrayList를 가지고 옴
+ArrayList<String>msgs = (ArrayList<String>)application.getAttribute("msgs");
+//msgs가 null 이 아닌 경우에만 목록 출력
+if(msgs != null) {
+for(String msg : msgs) {%>
+<li>
+<form name="form1" type="POST" action="delete.jsp">
+<%= msg %>
+<input type="hidden" name="del" value="<%=msg %>"/>
+<button type="submit">삭제</button>
+</form>
+</li>
+<% } 
+}
+%>
+</ul>
+<hr>
+<form name="form1" type="POST" action="twitter_logout.jsp">
+<button type="submit">로그아웃</button>
+</form>
+</div>
+</body>
+</html>
+
+tweet.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*, java.text.*"%>
+<!DOCTYPE html>
+<% request.setCharacterEncoding("UTF-8");
+String msg = request.getParameter("msg");
+Object username = session.getAttribute("user");
+ArrayList<String> msgs = (ArrayList<String>)application.getAttribute("msgs");
+if(msgs == null) {
+msgs = new ArrayList<String>();
+// application 에 ArrayList 저장
+application.setAttribute("msgs",msgs);
+}
+Date date = new Date();
+SimpleDateFormat f = new SimpleDateFormat("E MMM dd HH:mm", Locale.KOREA);
+msgs.add(username+" :: "+msg+" , "+ f.format(date));
+application.log(msg+"추가됨");
+response.sendRedirect("twitter_list.jsp");
+%>
+
+delete.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ch06 : add.jsp</title>
+</HEAD>
+<body>
+<% request.setCharacterEncoding("UTF-8");
+Object username = session.getAttribute("user");
+String del = request.getParameter("del");
+String deluser = del.split(" :: ")[0];
+ArrayList<String> msgs = (ArrayList<String>)application.getAttribute("msgs");
+if(msgs == null) {
+msgs = new ArrayList<String>();
+// application 에 ArrayList 저장
+application.setAttribute("msgs",msgs);
+}
+if(String.valueOf(username).equals(deluser)){
+	if(msgs != null && del != null) {
+	    msgs.remove(del); // 트윗 목록에서 삭제
+	    application.log(del+"삭제됨");
+	}
+	response.sendRedirect("twitter_list.jsp");
+}
+else{%>
+	<script>
+	alert("<%=deluser %> 님의 트윗이므로 <%=username %> 님은 권한이 없습니다."); 
+	history.go(-1); 
+	</script>
+<% }
+
+application.log("string"+String.valueOf(username));
+application.log("split"+del.split(" :: ")[0]);
+%>
+</body>
+</html>
+
+twitter_logout.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html>
+<%
+	request.setCharacterEncoding("UTF-8");
+	request.getSession().invalidate();
+	response.sendRedirect("twitter_login.jsp");
+%>
