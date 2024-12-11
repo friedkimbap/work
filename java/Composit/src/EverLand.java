@@ -1,24 +1,30 @@
 import java.util.ArrayList;
 
-public class RestaurantSection implements EverLandSection {
-    
-    @Override
-    public void addComponent() {
+public class EverLand {
 
+    ArrayList<EverLandFacility> components = new ArrayList<>();
+
+    public void addComponent(EverLandFacility component) {
+        components.add(component);
     }
 
-    @Override
-    public void removeComponent() {
-
+    public void removeComponent(EverLandFacility component) {
+        components.remove(component);
     }
 
-    @Override
     public int getAveragePreference() {
-        return 0;
+        int allPreference = 0;
+        for (EverLandFacility component : components) {
+            allPreference += component.getPreference();
+        }
+        return allPreference/components.size();
     }
 
-    @Override
-    public int getAllProfit() {
-        return 0;
+    public int getTotalProfit() {
+        int totalProfit = 0;
+        for (EverLandFacility component : components) {
+            totalProfit += component.getProfit();
+        }
+        return totalProfit;
     }
 }

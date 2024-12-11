@@ -1,7 +1,7 @@
-public class PauseCommand implements Command {
-    private Decorder decorder;
+public class MP3PauseCommand implements Command {
+    private MP3fileDecorder decorder;
 
-    public PauseCommand(Decorder decorder) {
+    public MP3PauseCommand(MP3fileDecorder decorder) {
         this.decorder = decorder;
     }
 

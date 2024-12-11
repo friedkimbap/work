@@ -1,4 +1,11 @@
-package PACKAGE_NAME;
+public class Coffee extends Drink{
+    @Override
+    public String getOrder() {
+        return "주문 : 커피";
+    }
 
-public class Coffee {
+    @Override
+    public int getCost() {
+        return 5000;
+    }
 }

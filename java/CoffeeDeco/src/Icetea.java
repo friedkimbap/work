@@ -1,4 +1,11 @@
-package PACKAGE_NAME;
+public class Icetea extends Drink {
+    @Override
+    public String getOrder() {
+        return "주문 : 아이스티";
+    }
 
-public class IceTea {
+    @Override
+    public int getCost() {
+        return 3500;
+    }
 }

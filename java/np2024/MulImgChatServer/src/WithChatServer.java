@@ -207,6 +207,7 @@ public class WithChatServer extends JFrame {
               uid = msg.userID;
               printDisplay(">> 새 참가자: " + uid);
               printDisplay(">> 현재 참가자 수: " + users.size());
+              printDisplay(">> 현재 핸들러 수: " + users.size());
             }
             case ChatMsg.MODE_LOGOUT -> {
               break;
@@ -216,6 +217,7 @@ public class WithChatServer extends JFrame {
               printDisplay(message);
               printDisplay("");
               broadcasting(msg);
+              printDisplay(">> 현재 핸들러 수: " + users.size());
             }
             case ChatMsg.MODE_TX_IMAGE -> {
               message = uid + ": " + msg.message;
